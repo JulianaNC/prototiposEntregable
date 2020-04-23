@@ -1,0 +1,70 @@
+<html lang="en" dir="ltr" ng-app="votaU">
+  <head>
+    <meta charset="utf-8">
+    <title>Crear Urna</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js">
+
+    </script>
+    <script src="https://code.angularjs.org/1.7.9/angular-route.min.js"></script>
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  </head>
+  <body ng-controller="miUrna">
+
+    <div class="row">
+
+      <h1 class="col-md-12 text-center" style="background-color: #A01BC4; padding: 20px; color: #FFF">Mi Urna</h1>
+
+    <div class="col-md-6" style="padding: 20px;" >
+
+      <p style="font-size: 30px; display:inline-block">Mis Preguntas</p>
+        {{mensajePreguntas}}
+
+        <button class="btn" style="background-color: #A01BC4; color: #FFF; display:inline-block; margin: 10px;" ng-click="agregarPreguntaBoton()">
+          <svg class="bi bi-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+          <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z" clip-rule="evenodd"/>
+        </svg>
+        </button>
+
+        <ul>
+          <li ng-repeat="pregunta in misPreguntas">
+            <button class="btn" name="button" ng-click="editarPregunta(pregunta.id)" style="background-color: #cc62ea">Editar</button>
+            <button class="btn" name="button" ng-click="borrarPregunta(pregunta.id)" style="background-color: #e2a5f3">Borrar</button>
+            {{pregunta.pregunta}}: <span ng-repeat="opcion in pregunta.opciones">{{opcion.cadena}}, </span> Voto en Blanco </li>
+        </ul>
+    </div>
+    <div class="col-md-6 text-center" style="padding: 20px; font-size: 20px;" ng-show="agregandoPregunta">
+
+      <label for="">Pregunta</label><br>
+      <input type="text" placeholder="¿Cuál es tu pregunta?" ng-model="nuevaPregunta.pregunta" required>
+      <br>
+      <label for="">Opciones</label>
+      <ul>
+        <li ng-repeat="opcion in nuevaPregunta.opciones">
+          <div class=""  >
+            <button class="btn" style="background-color: #A01BC4; color: #FFF; display:inline-block; margin: 10px; font-size:25px; padding: 0px 5px 0px 5px" ng-click="borrarOpcion(opcion.idOpcion)">X
+            </button>
+            <input type="text" name="" value="" ng-model="opcion.cadena">
+
+          </div>
+
+
+          </li>
+        <input type="text" name="" value="" placeholder="Escribe tu opción" ng-model="nuevaOpcion.cadena" onclick="document.getElementById('myInput').value = ''">
+        <button class="btn" style="background-color: #A01BC4; color: #FFF; display:inline-block; margin: 10px; font-size:25px; padding: 0px 5px 0px 5px" ng-click="agregarOpcionBoton()" id="myInput">+
+  </button>
+      </ul>
+      <div class="" ng-show="preguntaValida">
+        <button type="button" name="button" class="btn" style="background-color: #A01BC4; color: #FFF" ng-click="agregarPregunta()" >Agregar Pregunta</button>
+      </div>
+      <div class="" ng-show="preguntaValidaEditar">
+        <button type="button" name="button" class="btn" style="background-color: #A01BC4; color: #FFF" ng-click="agregarPreguntaEditar()" >Listo</button>
+      </div>
+
+    </div>
+    </div>
+  </body>
+</html>
